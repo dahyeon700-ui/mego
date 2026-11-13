@@ -1,0 +1,2 @@
+{"name":"MEGO MOVE","short_name":"MEGO","description":"운동·공부·일상, 내 방식대로 쓰는 MEGO","start_url":"./","scope":"./","display":"standalone","background_color":"#fffbe9","theme_color":"#1c2654","lang":"ko",
+"icons":[{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}

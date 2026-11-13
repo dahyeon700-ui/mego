@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function me() { return request.auth != null ? request.auth.token.email.split('@')[0] : ''; }
+
+    // 내 기록(비밀번호로 잠긴 상태로 저장): 나만 읽고 쓰기
+    match /accounts/{id} {
+      allow read, write: if request.auth != null && me() == id;
+    }
+    // 내 OOTD 사진(잠긴 상태): 나만 읽고 쓰기
+    match /ootd/{docId} {
+      allow read, write: if request.auth != null && docId.split('--')[0] == me();
+    }
+    // 가방 후기: 로그인한 사람만 남기기 · 읽기(관계자 화면)
+    match /reviews/{rid} {
+      allow create: if request.auth != null && request.resource.data.size() <= 10;
+      allow read: if request.auth != null;
+    }
+    // 그 밖의 곳은 모두 막기
+    match /{document=**} { allow read, write: if false; }
+  }
+}
